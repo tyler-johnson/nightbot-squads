@@ -2,6 +2,10 @@
   "name": "nightbot-squads-server",
   "version": "0.0.0",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tyler-johnson/nightbot-squads.git"
+  },
   "scripts": {
     "deploy": "npm run build:deploy && kubectl apply -f kubernetes.yml",
     "start": "node cli.js",
