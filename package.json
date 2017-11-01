@@ -1,0 +1,49 @@
+{
+  "name": "nightbot-squads-server",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm run build:deploy && kubectl apply -f kubernetes.yml",
+    "start": "node cli.js",
+    "build:deploy": "node .deploy/build",
+    "build:main": "rollup src/index.js -c > index.js",
+    "build:client": "rollup src/client.js -c | browserify - > public/client.js",
+    "build:cli": "echo \"#!/usr/bin/env node\" > cli.js && rollup src/cli.js -c >> cli.js && chmod +x cli.js",
+    "build": "run-p build:client build:main build:cli",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "dustjs-helpers": "^1.7.3",
+    "dustjs-linkedin": "^2.7.5",
+    "express": "^4.16.2",
+    "express-promise-router": "^2.0.0",
+    "minimist": "^1.2.0",
+    "pifall": "^1.1.1",
+    "pify": "^3.0.0",
+    "project-name-generator": "^2.1.4",
+    "redis": "^2.8.0"
+  },
+  "optionalDependencies": {
+    "hiredis": "^0.5.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "browserify": "^14.4.0",
+    "eslint": "^4.8.0",
+    "js-yaml": "^3.10.0",
+    "lodash": "^4.17.4",
+    "npm-run-all": "^4.1.1",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-json": "^2.3.0"
+  },
+  "files": [
+    "index.js",
+    "cli.js",
+    "public"
+  ]
+}

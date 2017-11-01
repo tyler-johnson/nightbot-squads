@@ -1,0 +1,6 @@
+/index.js
+/cli.js
+/public/client.js
+node_modules/
+deploy-config.yml
+kubernetes.*

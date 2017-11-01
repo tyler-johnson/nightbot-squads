@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nightbot Squads</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" type="text/css" />
+
+    <style type="text/css">
+      /*main {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }*/
+
+      section {
+        padding: 3rem 0;
+        clear: both;
+      }
+
+      section::after {
+        display: block;
+        content: "";
+        clear: both;
+      }
+
+      section:nth-child(even) {
+        background-color: #f7f7f9;
+      }
+
+      /*section + section {
+        border-top: 1px solid #eceeef;
+      }*/
+
+      .bordered {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .bordered .col-sm-6 {
+        border: 1px solid #eceeef;
+        padding: 1rem;
+      }
+
+      .bordered .col-sm-6 + .col-sm-6 {
+        border-left: 0;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      .offset-right {
+        float: right;
+        max-width: 40%;
+        margin: 0 0 1rem 1rem;
+      }
+
+      textarea {
+        min-height: 7rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <h1 class="mb-5 display-4">Nightbot Squads</h1>
+
+        <p>As a Twitch streamer, you squad up in games with other streamers. With Nightbot, your mods can set commands to display information about the other streamers. The most common example of this is the <code>!multi</code> command, which generally displays a MultiTwitch link so viewers can watch all streamers at the same time.</p>
+
+        <p>With this tool, your mods can run a single command, entering the other Twitch names. All the related commands can be updated automatically. Let's look at an example:</p>
+
+        <ol>
+          <li>
+            <p>You join a party of four streamers, including yourself. Your mod runs the following command with the other streamer's Twitch names.</p>
+            <p><img src="/screenshot_05.png" /></p>
+          </li>
+          <li>
+            <p>Your viewers want to get a MultiTwitch URL to view all the streams together. They run the <code>!multi</code> command which has been preconfigured.</p>
+            <p><img src="/screenshot_06.png" /></p>
+          </li>
+          <li>
+            <p>Later the squad disbands and you go back to playing solos. Your mod will run <code>!setsquad</code> without any names.</p>
+            <p><img src="/screenshot_07.png" /></p>
+          </li>
+          <li>
+            <p>Now when the viewers run <code>!multi</code>, they will see a different message.</p>
+            <p><img src="/screenshot_08.png" /></p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="offset-right">
+          <img src="/screenshot_13.png" />
+        </div>
+
+        <h3>Installation</h3>
+
+        <p>To install, create a <code>!setsquad</code> Nightbot command. Set the user level to Moderator so only your mods can use it.</p>
+
+        <div class="form-group row">
+          <div class="col-sm-6 mb-3">
+            <label>Squad ID</label>
+            <input type="text" class="form-control" id="squadid" />
+          </div>
+          <div class="col-sm-6 mb-3">
+            <label>Secret Key</label>
+            <input type="text" class="form-control" id="squadkey" />
+          </div>
+          <div class="col-sm-12">
+            <textarea id="setsquadcmd" readonly class="form-control"></textarea>
+            <p class="text-muted"><small><strong>Note:</strong> This is a Twitch chat command, however we recommend using the <a href="https://beta.nightbot.tv/commands/custom">Nightbot dashboard</a> as this URL contains a sensitive key that should not be shared.</small></p>
+          </div>
+        </div>
+
+        <p>This will only install the command to modify the squad list. Now you can add other commands that that use the squad names.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h4><code>!squad</code></h4>
+
+        <p>This command will list the other members of the squad and give a URL to their Twitch channel. Run this command in your Twitch chat to add it:</p>
+
+        <p>
+          <textarea id="squadcmd" readonly class="form-control" rows="5"></textarea>
+        </p>
+
+        <p>Here's how this command looks when run:</p>
+
+        <div class="row bordered">
+          <div class="col-sm-6">
+              <p>While in a squad</p>
+              <p><img src="/screenshot_10.png" /></p>
+            </div>
+            <div class="col-sm-6">
+              <p>While <em>not</em> in a squad</p>
+              <p><img src="/screenshot_09.png" /></p>
+          </div>
+        </div>
+
+        <p>This is the template used:</p>
+
+        <p>
+          <textarea readonly id="squadtpl" class="form-control" rows="5"></textarea>
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h4><code>!multi</code></h4>
+
+        <p>This command will display a URL to MultiTwitch with you and your squad name's properly formatted. If you aren't in a squad, a different message is shown. Run this command in your Twitch chat to add it:</p>
+
+        <p>
+          <textarea id="multicmd" readonly class="form-control" rows="5"></textarea>
+        </p>
+
+        <p>Here's how this command looks when run:</p>
+
+        <div class="row bordered">
+          <div class="col-sm-6">
+              <p>While in a squad</p>
+              <p><img src="/screenshot_06.png" /></p>
+            </div>
+            <div class="col-sm-6">
+              <p>While <em>not</em> in a squad</p>
+              <p><img src="/screenshot_08.png" /></p>
+          </div>
+        </div>
+
+        <p>This is the template used, with join set to <code>/</code>:</p>
+
+        <p>
+          <textarea readonly id="multitpl" class="form-control" rows="5"></textarea>
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h4>Template Reference</h4>
+
+        <p>The template syntax is in <a href="http://www.dustjs.com/">Dust.js</a>, refer to that documentation for help.</p>
+
+        <p>Templates have access to several variables:</p>
+
+        <ul>
+          <li><code>squad</code> - The current squad as an array.</li>
+          <li><code>text</code> - The current squad as a string. This will be joined using the join value, which defaults to a space.</li>
+          <li><code>empty</code> - Set to true when their are no members in the squad.</li>
+          <li><code>id</code> - Current squad id.</li>
+          <li><code>user</code> - Information provided by Nightbot about the user running the command.</li>
+          <li><code>channel</code> - Information provided by Nightbot about the channel the command is run in.</li>
+        </ul>
+
+        <p>Templates have access to all <a href="http://www.dustjs.com/guides/dust-helpers/">Dust helpers</a>. One more helper, <code>@join</code> has also been added to help convert the squad array into a string. This accepts two parameters, <code>value</code>, the array to join, and <code>sep</code>, the string seperator to join array items with. The body of the helper is used on each item in the list.</p>
+
+        <pre><code>{@join value=squad sep=", "}{.} ( http://twitch.tv/{.} ){/join}</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h4>Command Generator</h4>
+
+        <p>Use this quick form to generate your own squad commands.</p>
+
+        <form>
+          <div class="form-group">
+            <label>Join</label>
+            <input type="text" name="join" class="form-control" id="joininput" />
+          </div>
+
+          <div class="form-group">
+            <label>Template</label>
+            <textarea name="tpl" class="form-control" id="tplinput"></textarea>
+          </div>
+
+          <div class="row bordered">
+            <div class="col-sm-6">
+              <p>Generated Command URL</p>
+              <textarea class="form-control" readonly id="genurl"></textarea>
+            </div>
+            <div class="col-sm-6">
+              <p>Example Nightbot <code>!addcom</code> Command</p>
+              <textarea class="form-control" readonly id="addcom"></textarea>
+              <p><small class="text-muted">This is just an example, you will need to customize the output for Nightbot.</small></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="text-center">
+      <small>&copy; 2017 Tyler Johnson. License MIT. <a href="https://github.com">Source on Github.</a></small>
+    </section>
+
+    <script type="text/javascript" src="/client.js"></script>
+  </body>
+</html>
