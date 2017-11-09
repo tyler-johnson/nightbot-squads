@@ -39,7 +39,7 @@ function makeUrl(path, params) {
 }
 
 function addCommand(cmd, msg) {
-  return `!addcom ${cmd} -ul=moderator ${msg}`;
+  return `!addcom ${cmd} ${msg}`;
 }
 
 function command(name, tpl, join) {
@@ -55,7 +55,7 @@ function command(name, tpl, join) {
 
 function updateUI() {
   const setsquad = document.getElementById("setsquadcmd");
-  setsquad.value = addCommand("!setsquad", "$(urlfetch " + makeUrl("set", {
+  setsquad.value = addCommand("!setsquad", "-ul=moderator $(urlfetch " + makeUrl("set", {
     data: "$(querystring)",
     key
   }) + ")");
@@ -63,7 +63,7 @@ function updateUI() {
   command("multi", `{#empty}
 {channel.name} is not in a squad right now.
 {:else}
-http://www.multitwitch.tv/{channel.name}/{text}
+https://multistre.am/{channel.name}/{text}
 {/empty}`, "/");
 
   command("squad", `{channel.name} is {#empty}
